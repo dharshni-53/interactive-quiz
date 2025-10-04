@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Panel</h1>
+    <form id="addQuestionForm">
+      <input type="text" id="questionText" placeholder="Enter Question" required><br>
+      <input type="text" id="opt1" placeholder="Option 1" required><br>
+      <input type="text" id="opt2" placeholder="Option 2" required><br>
+      <input type="text" id="opt3" placeholder="Option 3" required><br>
+      <input type="text" id="opt4" placeholder="Option 4" required><br>
+      <input type="text" id="correct" placeholder="Correct Answer" required><br>
+      <button type="submit">Add Question</button>
+    </form>
+    <a href="index.html">Back to Home</a>
+  </div>
+
+  <script>
+    document.getElementById("addQuestionForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = {
+        q: document.getElementById("questionText").value,
+        options: [
+          document.getElementById("opt1").value,
+          document.getElementById("opt2").value,
+          document.getElementById("opt3").value,
+          document.getElementById("opt4").value
+        ],
+        answer: document.getElementById("correct").value
+      };
+
+      let questions = JSON.parse(localStorage.getItem("customQuestions")) || [];
+      questions.push(q);
+      localStorage.setItem("customQuestions", JSON.stringify(questions));
+
+      alert("Question Added!");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
